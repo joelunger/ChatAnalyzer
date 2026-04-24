@@ -12,6 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Export Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -40,11 +43,20 @@
             <p style="color: var(--text-muted);">Analysiere Chat Daten...</p>
         </div>
 
-        <div id="dashboard" class="hidden">
-            <!-- Key Metrics -->
-            <!-- General Overview -->
-            <div class="section-title">
-                <i data-feather="grid"></i> Übersicht
+        <div id="tabs" class="hidden" style="display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">
+            <button class="tab-btn active" data-tab="dashboard-view" style="background: transparent; color: var(--text-main); border: none; font-weight: 700; cursor: pointer; padding: 0.5rem 1rem; border-radius: 8px; transition: var(--transition);">Dashboard</button>
+            <button class="tab-btn" data-tab="chat-view" style="background: transparent; color: var(--text-muted); border: none; font-weight: 600; cursor: pointer; padding: 0.5rem 1rem; border-radius: 8px; transition: var(--transition);">Chat Viewer</button>
+        </div>
+
+        <div id="dashboard-view" class="tab-content hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div class="section-title" style="margin: 0; flex-grow: 1;">
+                    <i data-feather="grid"></i> Übersicht
+                </div>
+                <button id="exportBtn" class="btn-primary" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.5rem; border-radius: 12px; border: none; background: var(--accent-gradient); color: white; cursor: pointer; font-weight: 600; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); transition: var(--transition);">
+                    <i data-feather="download" style="width: 18px; height: 18px;"></i>
+                    Bericht Exportieren
+                </button>
             </div>
             <div class="stats-grid">
                 <div class="card">
@@ -146,6 +158,21 @@
                     </div>
                     <div class="stat-value" id="topLaugher" style="font-size: 1.5rem;">-</div>
                 </div>
+                <div class="card" style="grid-row: span 2;">
+                    <div class="card-header">
+                        <span class="card-title">Beste Sendezeit</span>
+                        <i data-feather="clock" style="color: #6366f1"></i>
+                    </div>
+                    <div id="optimalTimeMain">
+                        <div class="stat-value" id="optimalTime" style="font-size: 1.5rem;">-</div>
+                    </div>
+                    <div id="topOptimalTimes" style="margin-top: 1.5rem; border-top: 1px solid var(--glass-border); padding-top: 1rem;">
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Top 5 Empfehlungen</p>
+                        <ul id="optimalTimesList" style="list-style: none; padding: 0; margin: 0;">
+                            <!-- List items injected here -->
+                        </ul>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <span class="card-title">Aktivster Tag</span>
@@ -225,7 +252,15 @@
                 </div>
 
             </div>
+        </div>
 
+        <div id="chat-view" class="tab-content hidden">
+            <div class="section-title">
+                <i data-feather="message-circle"></i> Visueller Chat
+            </div>
+            <div id="chatContainer" style="background: rgba(0,0,0,0.2); border-radius: 20px; padding: 2rem; height: 700px; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; border: 1px solid var(--glass-border);">
+                <!-- Messages injected here -->
+            </div>
         </div>
     </div>
 

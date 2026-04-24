@@ -10,7 +10,7 @@ Fast, private, and local WhatsApp chat statistics and predictive analytics.
 
 ## Quick Start
 ```bash
-git clone https://git.joelunger.de/homelab/Whatsapp-Chat-Analyzer.git
+git clone https://github.com/joelunger/ChatAnalyzer.git
 php -S localhost:3000
 ```
 Open `http://localhost:3000`.
